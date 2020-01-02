@@ -22,7 +22,7 @@ const NewBook = (props) => {
       variables: { title, author, published: parseInt(published), genres }
     })
 
-    props.setPage( 'books' )
+    //props.setPage( 'books' )
 
     console.log('add book...')
 

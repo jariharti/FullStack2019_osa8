@@ -4,7 +4,6 @@ import { useQuery, useMutation } from '@apollo/react-hooks'
 import Authors from './components/Authors'
 import Books from './components/Books'
 import NewBook from './components/NewBook'
-import SetBirthday from './components/NewBook'
 
 const ALL_AUTHORS = gql`
   {
@@ -39,14 +38,6 @@ const CREATE_BOOK = gql`
     }
   }
 `
-const EDIT_AUTHOR = gql`
-  mutation changeBirthday($name: String!, $setBornTo: Int!) {
-    editAuthor(
-      name: $name
-      born: $born
-    )
-  }
-`
 
 
 const App = () => {
@@ -56,9 +47,6 @@ const App = () => {
   const books = useQuery( ALL_BOOKS )
   const [addBook] = useMutation( CREATE_BOOK, {
     refetchQueries: [{ query: ALL_BOOKS }]
-  })
-  const [editAuthor] = useMutation( EDIT_AUTHOR, {
-    refetchQueries: [{ query: ALL_AUTHORS }]
   })
 
   return (
@@ -75,11 +63,9 @@ const App = () => {
       <Books
         show = {page === 'books'} result = {books}
       />  
-      <SetBirthday
-        show = {page === 'books'} editAuthor = {editAuthor}
       />
       <NewBook
-        show = {page === 'add'} addBook = {addBook} setPage = {page => setPage(page)}
+        show = {page === 'add'} addBook = {addBook}
       />
 
     </div>
