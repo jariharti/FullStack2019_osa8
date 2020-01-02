@@ -1,10 +1,19 @@
-import React, { useState } from 'react'
+/* 8.8: Kirjailijoiden näkymä
+Toteuta kirjailijoiden näkymä, eli näytä sivulla kaikkien kirjailijoiden tiedot esim. seuraavasti:
+*/
 
-const Authors = (props) => {
-  if (!props.show) {
+import React from 'react'
+
+const Authors = props => {
+  if ( !props.show ) {
     return null
   }
-  const authors = []
+
+  if ( props.result.loading ) {
+    return <div>Waiting for server answer</div>
+  }
+
+  const authors = props.result.data.allAuthors
 
   return (
     <div>
@@ -29,7 +38,6 @@ const Authors = (props) => {
           )}
         </tbody>
       </table>
-
     </div>
   )
 }

@@ -1,3 +1,7 @@
+/*8.10: Kirjan lisäys
+Toteuta sovellukseen mahdollisuus uusien kirjojen lisäämiseen.
+*/
+
 import React, { useState } from 'react'
 
 const NewBook = (props) => {
@@ -13,6 +17,12 @@ const NewBook = (props) => {
 
   const submit = async (e) => {
     e.preventDefault()
+
+    await props.addBook({
+      variables: { title, author, published: parseInt(published), genres }
+    })
+
+    props.setPage( 'books' )
 
     console.log('add book...')
 

@@ -1,11 +1,19 @@
+/* 8.9: Kirjojen näkymä
+Toteuta kirjojen näkymä, eli näytä sivulla kirjoista muut tiedot paitsi genret.
+*/
+
 import React from 'react'
 
-const Books = (props) => {
+const Books = props => {
   if (!props.show) {
     return null
   }
 
-  const books = []
+  if ( props.result.loading ) {
+    return <div>Waiting for server answer</div>
+  }
+
+  const books = props.result.data.allBooks
 
   return (
     <div>
